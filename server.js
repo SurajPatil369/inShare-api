@@ -5,7 +5,17 @@ const PORT = process.env.PORT || 8000;
 app.use(express.static('public'));//which folder to watch for staticfiles
 app.use(express.json());
 const connectDB=require('./config/db');
+const cors = require('cors')
 connectDB();
+
+
+//Cors setUp
+
+const corsOptions={
+    origin:process.env.ALLOWED_CLIENTS.split(',')
+
+}
+app.use(cors(corsOptions))
 
 //template engine
 app.set('views',path.join(__dirname,'/views'));
